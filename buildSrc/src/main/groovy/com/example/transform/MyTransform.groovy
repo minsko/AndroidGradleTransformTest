@@ -83,7 +83,11 @@ public class MyTransform extends Transform {
 				}
 				FileUtils.copyDirectory(dirInput.getFile(), dest);
 			}
-			for (JarInput jarInput: input.jarInputs) {
+			Collection<JarInput> jarInputs = new ArrayList<>()
+			jarInputs.addAll(input.jarInputs)
+			Collections.shuffle(jarInputs);
+			//Attempting to messup the order does not appear to harm anything.
+			for (JarInput jarInput: jarInputs) {
 			    def src = jarInput.getFile()
 				String jarName = jarInput.name;
 				if (jarName.endsWith(".jar")) {
